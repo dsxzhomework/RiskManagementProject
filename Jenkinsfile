@@ -26,7 +26,7 @@ node { stage('SCM') {
 
     		sh "docker run --name my -p 11111:8080 -d tomcat"
 
-		sh "docker cp target/RiskManagement-0.0.1-SNAPSHOT.war my:/usr/local/tomcat/webapps"
+		sh "docker cp target/RiskManagementProject-0.0.1-SNAPSHOT.war my:/usr/local/tomcat/webapps"
 
 	}  
 
