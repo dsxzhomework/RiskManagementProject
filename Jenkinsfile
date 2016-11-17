@@ -48,7 +48,7 @@ node { stage('SCM') {
 
 
 
-    		sh "docker run --name my -p 11111:8080 -d tomcat"
+    		sh "docker run --name my -p 11111:8080 -d dordoka/tomcat"
 
 
 
