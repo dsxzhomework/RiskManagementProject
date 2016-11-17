@@ -52,7 +52,7 @@ node { stage('SCM') {
 
 
 
-		sh "docker cp target/RiskManagement-0.0.1-SNAPSHOT.war my:/usr/local/tomcat/webapps"
+		sh "docker cp target/RiskManagement-0.0.1-SNAPSHOT.war my:/opt/tomcat/webapps"
 
 
 
