@@ -40,8 +40,8 @@
 							String rname = (String)request.getServletContext().getAttribute("rname");
 						%>
 						<li><a href="showproject.jsp"><%=pname %></a></li>	
-						<li><a href="#" onclick="show('member')">项目成员</a>
-						<li><a href="#" onclick="show('riskList')">风险列表</a>
+						<li><a href="#" onclick="show('member')">项目成员</a></li>	
+						<li><a href="#" onclick="show('riskList')">风险列表</a></li>	
 						<script>
 							function show(id){
 								document.getElementById('member').className="hidden";
@@ -113,16 +113,19 @@
 <div id="riskList" class="hidden">
 	<div class="mybutton">
 		<a href="/RiskManagement/addrisk.jsp" style="color: #000">添加风险</a>
+		
 	</div>
+	<a href="/RiskManagement/addrisk.jsp" style="color: #000">导入</a>
 	<br>
 	<div class="component">
 	<table>
 		<thead>
 				<tr>
-                    <th>名称</th>
+                    <th>类型</th>
 					<th>危险程度</th>
 					<th>状态</th>
 					<th>查看</th>
+					<th>删除</th>
 				</tr>
 			</thead>
 			<% 
@@ -144,6 +147,11 @@
                     <td><%=affects[i] %></td>
                     <td><%=states[i] %></td>
                     <td><a href="/RiskManagement/showRisk?rid=<%=rids[i]%>">查看</a></td>
+                    <%if(states[i].equals("未发生")){ %>
+                   	<td><a href="/RiskManagement/deleteRisk?rid=<%=rids[i]%>">删除</a></td>
+                    <%}else{ %>
+ 					<td style="color: grey;">删除</td> 
+                    <%} %>
                 </tr>
 						
 			<%

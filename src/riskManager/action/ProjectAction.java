@@ -27,6 +27,7 @@ public class ProjectAction extends BaseAction{
 	String success = "success";
 	String fail = "fail";
 	String repeat = "repeat";
+	String[] typename = {"人员变动","缺乏共识","资金不足","设备故障","设计欠缺","计划过于乐观","其他"};
 	public ProjectService getProjectService() {
 		return projectService;
 	}
@@ -99,7 +100,7 @@ public class ProjectAction extends BaseAction{
 		for(int i=0;i<rl.size();i++){
 			Risk r = rl.get(i);
 			rid[i] = r.getRid()+"";
-			rname[i] = r.getName();
+			rname[i] = typename[r.getType()];
 			content[i] = r.getContent();
 			int s = r.getState();
 			int a = r.getAffect();
@@ -130,12 +131,12 @@ public class ProjectAction extends BaseAction{
 			User u = ul.get(i);
 			mids[i] = u.getUid()+"";
 			mnames[i] = u.getName();
+			//System.out.println(mids[i]+" "+mnames[i]);
 			mroles[i] = u.getRole();
 		}
 		sc.setAttribute("mids", mids);
 		sc.setAttribute("mnames", mnames);
 		sc.setAttribute("mroles", mroles);
-		
 		return success;
 	}
 }

@@ -38,6 +38,8 @@
 	<div class="section group">
         <form action="/RiskManagement/addRisk" method="post" class="basic-grey">
         		<%
+        		String[] mids = (String[])request.getServletContext().getAttribute("mids");
+        		String[] mnames = (String[])request.getServletContext().getAttribute("mnames");
 				if(request.getParameter("error") != null && request.getParameter("error").equals("1")){
 				%>
 				<p style="color: red;">所有选项必须填写</p>
@@ -45,21 +47,36 @@
 				}
 				%>
 			<div>
-            <span >风险名称</span>
-            <input type="text" class="text" name="name" placeholder="风险名称" onfocus="this.value = '';" >
+            <span >风险类型</span>
+            <select name="type">
+            	<option value="">--</option>
+            	<option value="0">人员变动</option>
+            	<option value="1">缺乏共识</option>
+                <option value="2">资金不足</option>
+                <option value="3">设备故障</option>
+                <option value="4">设计欠缺</option>
+                <option value="5">计划过于乐观</option>
+                <option value="6">其他</option>
+            </select>
             </div>
  
             <div style="clear:both;">
             <span>内容</span>
             <textarea class="text" name="content" rows="5" cols="60" placeholder="风险内容描述" onfocus="this.value='';"></textarea>
             </div>
+            
+            <div style="clear:both;">
+            <span>应对策略</span>
+            <textarea class="text" name="advice" rows="5" cols="60" placeholder="应对策略描述" onfocus="this.value='';"></textarea>
+            </div>
+            
             <div style="clear:both;">
             <span>可能性</span>
             <select class ="selectStyle" name="possibility">
                 <option value="">--</option>
                 <option value="0">低</option>
                 <option value="1">中</option>
-                <option value="1">高</option>
+                <option value="2">高</option>
             </select>      
            </div>
             <div style="clear:both;">
@@ -68,7 +85,7 @@
                 <option value="">--</option>
                 <option value="0">低</option>
                 <option value="1">中</option>
-                <option value="1">高</option>
+                <option value="2">高</option>
             </select>  
            </div>
             <div style="clear:both;">
@@ -76,7 +93,20 @@
             <textarea class="text" name="trigger" rows="2" cols="30" placeholder="触发值/值域" onfocus="this.value='';"></textarea>
             </div>
             <br>
-            
+            <div>
+            <span>跟踪者</span>
+            <select name="tracker">
+			<%
+			if(mids!=null){
+				for(int i=0;i<mids.length;i++){
+	   		%>
+	    		<option value="<%=mids[i] %>"><%=mnames[i] %></option>
+	    	<%
+	    		}
+			}
+	    	%>
+	        </select>
+            </div>
 			<input type="submit" value="确定"  class="button" style="clear:both;margin-left:80px;margin-top:30px;">
           
         </form>

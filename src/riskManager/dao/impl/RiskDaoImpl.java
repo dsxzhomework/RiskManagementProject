@@ -1,5 +1,6 @@
 package riskManager.dao.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -11,7 +12,7 @@ import riskManager.dao.RiskDao;
 import riskManager.model.Risk;
 
 public class RiskDaoImpl extends YeekuHibernateDaoSupport implements RiskDao{
-
+	
 	@Autowired
 	private BaseDao baseDao;
 	
@@ -69,4 +70,32 @@ public class RiskDaoImpl extends YeekuHibernateDaoSupport implements RiskDao{
 		return r;
 	}
 
+	
+	//?
+	@Override
+	public void delete(Risk risk) {
+		// TODO Auto-generated method stub
+		baseDao.delete(risk);
+	}
+
+	@Override
+	public List<Integer> statisticIdentify(Date start, Date end) {
+		// TODO Auto-generated method stub
+		String sql = "select t.type from (select type,count(type) from riskManager.model.Risk where buildtime between '"+start+"' and '"+end+"' group by type order by count(type) desc) t";
+		Session session = baseDao.getNewSession();
+		List<Integer> result = session.createQuery(sql).list();
+		return result;
+	}
+
+	@Override
+	public List<Integer> statisticFault(Date start, Date end) {
+		// TODO Auto-generated method stub
+		String sql = "select t.type from (select type,count(type) from riskManager.model.Risk where changetime between '"+start+"' and '"+end+"' group by type order by count(type) desc) t";
+		Session session = baseDao.getNewSession();
+		List<Integer> result = session.createQuery(sql).list();
+		return null;
+	}
+
+	
+	
 }

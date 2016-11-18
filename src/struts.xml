@@ -48,6 +48,15 @@
 			<result name="success" type="redirect">showrisk.jsp</result>
 		</action>
 		
+		<action name="deleteRisk" class="riskManager.action.RiskAction" method="delete">
+			<result name="success" type="redirect">showproject.jsp</result>
+			<result name="fail" type="redirect">showproject.jsp?error=1</result>
+		</action>
+		
+		<action name="updateRisk" class="riskManager.action.RiskAction" method="update">
+			<result name="success" type="redirect">/RiskManagement/showRisk</result>
+		</action>
+		
 		<action name="changeState" class="riskManager.action.RiskAction" method="change">
 			<result name="success" type="redirect">showrisk.jsp</result>
 			<result name="fail" type="redirect">show.jsp?error=1</result>
